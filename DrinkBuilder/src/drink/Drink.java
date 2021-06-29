@@ -15,6 +15,11 @@ public class Drink {
 	private String name = "";
 	
 	/**
+	 * A integer to track # of ingredients in drink
+	 */
+	private int ingredientCount = 0;
+	
+	/**
 	* A String to track drink source
 	*/
 	private String source = "";
@@ -52,9 +57,10 @@ public class Drink {
 	 * @param category
 	 * @param directions
 	 */
-	public Drink(String name, String source, String category, String directions)
+	public Drink(String name, int ingredientCount, String source, String category, String directions)
 	{
 		setName(name);
+		setIngredientCount(ingredientCount);
 		setSource(source);
 		setCategory(category);
 		setDirections(directions);
@@ -163,5 +169,21 @@ public class Drink {
 	 */
 	public void setDirections(String directions) {
 		this.directions = directions;
+	}
+	
+	/**
+	 * Returns numver of ingredients in drink
+	 * @return ingredientCount
+	 */
+	public int getIngredientCount() {
+		return ingredientCount;
+	}
+
+	/**
+	 * Sets ingredient count of object to ingredientCount
+	 * @param ingredientCount
+	 */
+	public void setIngredientCount(int ingredientCount) {
+		this.ingredientCount = ingredientCount;
 	}
 }
