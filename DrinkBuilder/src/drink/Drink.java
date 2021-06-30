@@ -172,7 +172,7 @@ public class Drink {
 	}
 	
 	/**
-	 * Returns numver of ingredients in drink
+	 * Returns number of ingredients in drink
 	 * @return ingredientCount
 	 */
 	public int getIngredientCount() {
