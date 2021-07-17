@@ -45,6 +45,10 @@ public class DrinkHelper
 			MenuHelper.displaySources();
 			System.out.print("Enter selection: ");
 			selection = InputHelper.getInt(scanner);
+			source = getSource(selection);
+			
+			System.out.print("Enter drink origin: ");
+			origin = InputHelper.getSting(scanner);
 			
 			
 			System.out.print("Is the above correct?(yes/no): ");
@@ -66,6 +70,44 @@ public class DrinkHelper
 	
 	public static void viewDrink()
 	{
+		
+	}
+	
+	private static String getSource(int selection)
+	{
+		String source = "";
+		
+		switch(selection)
+		{
+			case 1:
+				source = "Anime";
+				break;
+			case 2:
+				source = "Books";
+				break;
+			case 3:
+				source = "Cartoons";
+				break;
+			case 4:
+				source = "Comic Books";
+				break;
+			case 5:
+				source = "Games";
+				break;
+			case 6:
+				source = "Movies";
+				break;
+			case 7:
+				source = "TV";
+				break;
+			case 8:
+				source = "Video Games";
+				break;
+			default:
+				System.out.println("Invalid Selection.");
+		}
+		
+		return source;
 		
 	}
 

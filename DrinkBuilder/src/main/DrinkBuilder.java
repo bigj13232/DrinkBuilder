@@ -16,6 +16,7 @@ public class DrinkBuilder
 		int menuOption = 1;
 		Scanner menuInput = new Scanner(System.in);
 		
+		System.out.println("Welcome to the Drink Database Builder");
 		do
 		{
 			MenuHelper.displayMenu(MenuHelper.MAIN_MENU);
@@ -32,6 +33,9 @@ public class DrinkBuilder
 				case 3:
 					break;
 				case 4:
+					break;
+				case 0:
+					System.out.println("Thank you for using the Drink Database Builder");
 					break;
 				default:
 					System.out.println("Invalid menu option, try again");

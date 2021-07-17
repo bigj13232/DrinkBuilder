@@ -35,6 +35,12 @@ public class Drink {
 	private String directions = "";
 	
 	/**
+	 * Boolean variable to track whether drink is a mocktail
+	 */
+	
+	private boolean isMocktail;
+	
+	/**
 	* A List of Ingredients to track drink ingredients
 	*/
 	private List<Ingredient> ingredients = new ArrayList<Ingredient>();
@@ -48,6 +54,7 @@ public class Drink {
 		setSource(null);
 		setCategory(null);
 		setDirections(null);
+		setMocktail(false);
 	}
 	
 	/**
@@ -57,13 +64,14 @@ public class Drink {
 	 * @param category
 	 * @param directions
 	 */
-	public Drink(String name, int ingredientCount, String source, String category, String directions)
+	public Drink(String name, int ingredientCount, String source, String category, String directions, boolean isMocktail)
 	{
 		setName(name);
 		setIngredientCount(ingredientCount);
 		setSource(source);
 		setCategory(category);
 		setDirections(directions);
+		setMocktail(isMocktail);
 	}
 	
 	/**
@@ -170,6 +178,23 @@ public class Drink {
 	public void setDirections(String directions) {
 		this.directions = directions;
 	}
+	
+	/**
+	 * Returns boolean value - true for mocktail, false for alcoholic
+	 * @return isMocktail
+	 */
+	public boolean isMocktail() {
+		return isMocktail;
+	}
+
+	/**
+	 * Sets boolean value to determine if drink is a mocktail/alcoholic
+	 * @param isMocktail
+	 */
+	public void setMocktail(boolean isMocktail) {
+		this.isMocktail = isMocktail;
+	}
+
 	
 	/**
 	 * Returns number of ingredients in drink

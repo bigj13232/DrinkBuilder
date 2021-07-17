@@ -7,7 +7,6 @@ public enum Source
 	CARTOONS("Cartoons"),
 	COMIC_BOOKS("Comic Books"),
 	GAMES("Games"),
-	MOCKTAILS("Mocktails"),
 	MOVIES("Movies"),
 	TV("TV"),
 	VIDEO_GAMES("Video Games");
