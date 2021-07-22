@@ -27,7 +27,7 @@ public class Drink {
 	/**
 	* A String to track drink category(video game, TV, book, etc.)
 	*/
-	private String category = "";
+	private String origin = "";
 	
 	/**
 	* A String to track drink instructions
@@ -35,10 +35,9 @@ public class Drink {
 	private String directions = "";
 	
 	/**
-	 * Boolean variable to track whether drink is a mocktail
+	 * char variable to track whether drink is a mocktail
 	 */
-	
-	private boolean isMocktail;
+	private char isMocktail;
 	
 	/**
 	* A List of Ingredients to track drink ingredients
@@ -54,7 +53,7 @@ public class Drink {
 		setSource(null);
 		setCategory(null);
 		setDirections(null);
-		setMocktail(false);
+		setMocktail('N');
 	}
 	
 	/**
@@ -64,10 +63,9 @@ public class Drink {
 	 * @param category
 	 * @param directions
 	 */
-	public Drink(String name, int ingredientCount, String source, String category, String directions, boolean isMocktail)
+	public Drink(String name, String source, String category, String directions, char isMocktail)
 	{
 		setName(name);
-		setIngredientCount(ingredientCount);
 		setSource(source);
 		setCategory(category);
 		setDirections(directions);
@@ -111,15 +109,15 @@ public class Drink {
 	 * @return category
 	 */
 	public String getcategory() {
-		return category;
+		return origin;
 	}
 
 	/**
 	 * Sets drink category to category
 	 * @param category
 	 */
-	public void setCategory(String category) {
-		this.category = category;
+	public void setCategory(String origin) {
+		this.origin = origin;
 	}
 
 	/**
@@ -138,6 +136,7 @@ public class Drink {
 		try
 		{
 			Collections.copy(this.ingredients, ingredients);
+			this.ingredientCount = this.ingredients.size();
 		}
 		
 		catch (IllegalArgumentException e) {
@@ -183,7 +182,7 @@ public class Drink {
 	 * Returns boolean value - true for mocktail, false for alcoholic
 	 * @return isMocktail
 	 */
-	public boolean isMocktail() {
+	public char isMocktail() {
 		return isMocktail;
 	}
 
@@ -191,7 +190,7 @@ public class Drink {
 	 * Sets boolean value to determine if drink is a mocktail/alcoholic
 	 * @param isMocktail
 	 */
-	public void setMocktail(boolean isMocktail) {
+	public void setMocktail(char isMocktail) {
 		this.isMocktail = isMocktail;
 	}
 
@@ -210,5 +209,31 @@ public class Drink {
 	 */
 	public void setIngredientCount(int ingredientCount) {
 		this.ingredientCount = ingredientCount;
+	}
+	
+	/**
+	 * Returns drink details in easy to read format
+	 */
+	public String toString()
+	{
+		String output = "";
+		
+		output = output + "Drink Name: " + this.name + "\n";
+		output = output + "Drink Source: " + this.source + "\n";
+		output = output + "Drink Origin: " + this.origin + "\n";
+		output = output + "Drink Directions: " + this.directions + "\n";
+		if(isMocktail == 'Y')
+			output = output + "Drink is a Mocktail.\n";
+		else if (isMocktail == 'N')
+			output = output + "Drink is not a Mocktail.\n";
+		else
+			output = output + "Mocktail variable incorrect. \n";
+		output = output + "This drink has " + this.ingredientCount + " ingredients.\n";
+		
+		for(Ingredient ingredient : this.ingredients )
+		{
+			output = output + ingredient.toString() + "\n";
+		}		
+		return output;
 	}
 }

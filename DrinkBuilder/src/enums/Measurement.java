@@ -3,7 +3,7 @@ package enums;
 public enum Measurement
 {
 	OUNCE("Ounce(s)"),
-	ML("ML(s)"),
+	ML("ML"),
 	EACH("each.");
 	
 	final public String value;
