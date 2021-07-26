@@ -2,6 +2,7 @@ package drink;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import helpers.InputHelper;
 import helpers.MenuHelper;
@@ -17,16 +18,11 @@ public class DrinkHelper
 		char ingredientLoop = 0;
 		int selection = 0;
 		char correct = 0;
-		
-		//begin Drink variables
-		String drinkName;
-		String source;
-		String origin;
-		String directions;
-		char isMocktail;
+		Scanner scanner = new Scanner(System.in);
+	
 		Ingredient ingredient;
 		List<Ingredient> ingredients = new ArrayList<Ingredient>();
-		//end Drink variables
+		
 		
 		//begin Ingredient variables
 		float amount = 0f;
@@ -39,95 +35,32 @@ public class DrinkHelper
 		//begin main loop
 		do
 		{
-			//Get drink name
-			System.out.print("Enter drink name: ");
-			drinkName = InputHelper.getLine();
-			
-			
-			//begin get source loop
-			do
-			{
-				//get drink source: anime, movie, tv, etc.
-				MenuHelper.displaySources();
-				System.out.print("Enter selection: ");
-				selection = InputHelper.getInt();
-				source = getSource(selection);
-			}while(selection > 8);
-			//end get source loop
-			
-			
-			//Get drink origin.  What IP is it from? Star Wars, Mario, etc.
-			System.out.print("Enter drink origin: ");
-			origin = InputHelper.getLine();
-			
-			//Get drink instructions
-			System.out.print("Enter drink instructions: ");
-			directions = InputHelper.getLine();	
-			
-			//get mocktail
-			System.out.print("Is the drink a mocktail? yes/no");
-			isMocktail = InputHelper.getLine().toUpperCase().charAt(0);
-			
+			addedDrink = getDrinkDetails(scanner);
 			//begin drink ingredient loop
 			do
 			{
-				//Get ingredient amount
-				System.out.print("Enter ingredient amount: ");
-				amount = Float.parseFloat(InputHelper.getLine());
+				ingredient = getIngredientDetails(scanner);
 				
-				//begin get measurement loop
-				do
-				{
-					//get measurement type
-					MenuHelper.displayMeasurements();
-					System.out.print("Enter selection: ");
-					selection = InputHelper.getInt();
-					measurement = getMeasurement(selection);
-				}while(selection > 3);
-				//end get measurement loop
-				
-				//get ingredient name
-				System.out.print("Enter ingredient name: ");
-				ingredientName = InputHelper.getLine();
-				
-				//get ingredient type
-				System.out.print("Enter ingredient type: ");
-				type = InputHelper.getLine();				
-				
-				
-				
-				ingredient = new Ingredient(amount, measurement, ingredientName, type);
-				
-				System.out.println(ingredient.toString());
-				System.out.println("Is the above correct?");
-				correct = InputHelper.getLine().toUpperCase().charAt(0);
-				
-				if (correct == 'Y')
-				{
-					System.out.println("Adding " + ingredient.toString() + " to ingredient list.");
-					ingredients.add(ingredient);
-				}
-				else if(correct == 'N')
-				{
-					System.out.println("Clearing imgredient");
-					ingredient = null;
-				}
+				addedDrink.addIngredient(ingredient);
 				
 				//More ingredients to add?
+				scanner = new Scanner(System.in);
 				System.out.println("Do you have more ingredients to add?(yes/no): ");
-				ingredientLoop = InputHelper.getLine().toUpperCase().charAt(0);
+				ingredientLoop = InputHelper.getString(scanner).toUpperCase().charAt(0);
 				
 			}while (ingredientLoop == 'Y');
 			//end drink ingredient loop
 			
-			addedDrink = new Drink(drinkName, source, origin, directions, isMocktail);
+			
 			addedDrink.setIngredients(ingredients);		
 			
 			System.out.println("Drink Info: ");
 			System.out.print("Is the above correct?(yes/no): ");
+			scanner = new Scanner(System.in);
 			mainLoopContinue = InputHelper.getLine().toUpperCase().charAt(0);
 		}while (mainLoopContinue == 'N');
 		//end main loop
+		scanner.close();
 		
 		
 	}
@@ -147,6 +80,11 @@ public class DrinkHelper
 		
 	}
 	
+	/**
+	 * Returns the general source of the drink(from Anime, Movies, etc.) based on menu selection
+	 * @param selection
+	 * @return source
+	 */
 	private static String getSource(int selection)
 	{
 		String source = "";
@@ -183,6 +121,11 @@ public class DrinkHelper
 		}		
 		return source;		
 	}
+	/**
+	 * Returns oz, ML or each based on menu selection
+	 * @param selection
+	 * @return measurement
+	 */
 	private static String getMeasurement(int selection)
 	{
 		String measurement = "";
@@ -203,5 +146,127 @@ public class DrinkHelper
 				break;
 		}
 		return measurement;
+	}
+
+	/**
+	 * Gathers drink details and returns drink object
+	 * @param scanner
+	 * @return drink
+	 */
+	private static Drink getDrinkDetails(Scanner scanner)
+	{
+		//begin Drink variables
+		String drinkName;
+		String source;
+		String origin;
+		String directions;
+		char isMocktail;
+		//end Drink variables
+		
+		Drink drink;
+		
+		int selection = 0;
+		
+		//Get drink name
+		System.out.print("Enter drink name: ");
+		drinkName = InputHelper.getString(scanner);
+		
+		
+		//begin get source loop
+		do
+		{
+			//get drink source: anime, movie, tv, etc.
+			MenuHelper.displaySources();
+			System.out.print("Enter selection: ");
+			selection = InputHelper.getInt(scanner);
+			source = getSource(selection);
+		}while(selection > 8);
+		//end get source loop	
+		
+		scanner = new Scanner(System.in);
+		//Get drink origin.  What IP is it from? Star Wars, Mario, etc.
+		System.out.print("Enter drink origin: ");
+		origin = InputHelper.getString(scanner);
+		scanner = new Scanner(System.in);
+		//Get drink instructions
+		System.out.print("Enter drink instructions: ");
+		directions = InputHelper.getString(scanner);
+		
+		//get mocktail
+		System.out.print("Is the drink a mocktail? yes/no");
+		isMocktail = InputHelper.getString(scanner).toUpperCase().charAt(0);
+		
+		System.out.println("Drink Name: " + drinkName);
+		System.out.println("Drink Source: " + source);
+		System.out.println("Drink Origin: " + origin);
+		System.out.println("Is the drink a mocktail?" + isMocktail);
+		System.out.println("Drink Directions: \n" + directions + "\n");
+		
+		drink = new Drink(drinkName, source, origin, directions, isMocktail);
+		
+		return drink;
+	}
+	
+	private static Ingredient getIngredientDetails(Scanner scanner)
+	{
+		
+		float amount;
+		String measurement = "";
+		String ingredientName = "";
+		String type = "";
+		
+		int selection = 0;
+		
+		Ingredient ingredient;
+		
+		char correct;
+		
+		//Get ingredient amount
+		scanner = new Scanner(System.in);
+		System.out.print("Enter ingredient amount: ");
+		amount = Float.parseFloat(InputHelper.getString(scanner));
+		
+		//begin get measurement loop
+		do
+		{
+			//get measurement type
+			MenuHelper.displayMeasurements();
+			System.out.print("Enter selection: ");
+			scanner = new Scanner(System.in);
+			selection = InputHelper.getInt(scanner);
+			measurement = getMeasurement(selection);
+		}while(selection > 3);
+		//end get measurement loop
+		
+		//get ingredient name
+		System.out.print("Enter ingredient name: ");
+		scanner = new Scanner(System.in);
+		ingredientName = InputHelper.getString(scanner);
+		
+		//get ingredient type
+		System.out.print("Enter ingredient type: ");
+		scanner = new Scanner(System.in);
+		type = InputHelper.getString(scanner);		
+		
+		
+		
+		ingredient = new Ingredient(amount, measurement, ingredientName, type);
+		
+		System.out.println(ingredient.toString());
+		System.out.println("Is the above correct?");
+		scanner = new Scanner(System.in);
+		correct = InputHelper.getString(scanner).toUpperCase().charAt(0);
+		
+		if (correct == 'Y')
+		{
+			System.out.println("Adding " + ingredient.toString() + " to ingredient list.");
+		}
+		else if(correct == 'N')
+		{
+			System.out.println("Clearing imgredient");
+			ingredient = null;
+		}
+		
+		return ingredient;
 	}
 }

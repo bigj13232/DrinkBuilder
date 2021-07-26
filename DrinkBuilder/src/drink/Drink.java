@@ -15,11 +15,6 @@ public class Drink {
 	private String name = "";
 	
 	/**
-	 * A integer to track # of ingredients in drink
-	 */
-	private int ingredientCount = 0;
-	
-	/**
 	* A String to track drink source
 	*/
 	private String source = "";
@@ -133,10 +128,10 @@ public class Drink {
 	 * @param ingredients
 	 */
 	public void setIngredients(List<Ingredient> ingredients) {
+		this.ingredients = new ArrayList<Ingredient>(ingredients.size());
 		try
 		{
 			Collections.copy(this.ingredients, ingredients);
-			this.ingredientCount = this.ingredients.size();
 		}
 		
 		catch (IllegalArgumentException e) {
@@ -160,6 +155,11 @@ public class Drink {
 		Ingredient tempIngredient = new Ingredient(amount, measurement, name, type);
 		
 		ingredients.add(tempIngredient);		
+	}
+	
+	public void addIngredient(Ingredient ingredient)
+	{
+		this.ingredients.add(ingredient);
 	}
 	
 	/**
@@ -193,23 +193,6 @@ public class Drink {
 	public void setMocktail(char isMocktail) {
 		this.isMocktail = isMocktail;
 	}
-
-	
-	/**
-	 * Returns number of ingredients in drink
-	 * @return ingredientCount
-	 */
-	public int getIngredientCount() {
-		return ingredientCount;
-	}
-
-	/**
-	 * Sets ingredient count of object to ingredientCount
-	 * @param ingredientCount
-	 */
-	public void setIngredientCount(int ingredientCount) {
-		this.ingredientCount = ingredientCount;
-	}
 	
 	/**
 	 * Returns drink details in easy to read format
@@ -228,7 +211,7 @@ public class Drink {
 			output = output + "Drink is not a Mocktail.\n";
 		else
 			output = output + "Mocktail variable incorrect. \n";
-		output = output + "This drink has " + this.ingredientCount + " ingredients.\n";
+		output = output + "This drink has " + this.ingredients.size() + " ingredients.\n";
 		
 		for(Ingredient ingredient : this.ingredients )
 		{

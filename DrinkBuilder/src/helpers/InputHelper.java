@@ -9,12 +9,11 @@ public class InputHelper
 	 * @param scanner
 	 * @return returnInt
 	 */
-	public static int getInt()
+	public static int getInt(Scanner scanner)
 	{
-		Scanner scanner = new Scanner(System.in);
 		int returnInt = 0;
+		scanner = new Scanner(System.in);
 		returnInt = scanner.nextInt();
-		scanner.close();
 		return returnInt;
 	}
 	
@@ -23,12 +22,10 @@ public class InputHelper
 	 * @param scanner
 	 * @return returnFloat
 	 */
-	public static float getFloat()
+	public static float getFloat(Scanner scanner)
 	{
 		float returnFloat = 0f;
-		Scanner scanner = new Scanner(System.in);
 		returnFloat = scanner.nextFloat();
-		scanner.close();
 		return returnFloat;
 	}
 	/**
@@ -36,12 +33,10 @@ public class InputHelper
 	 * @param scanner
 	 * @return returnString
 	 */
-	public static String getString()
+	public static String getString(Scanner scanner)
 	{
-		String returnString = "";
-		Scanner scanner = new Scanner(System.in);
-		returnString = scanner.next();
-		scanner.close();
+		String returnString = "";	
+		returnString = scanner.nextLine();
 		return returnString;
 	}
 	
@@ -50,12 +45,12 @@ public class InputHelper
 	 * @param scanner
 	 * @return
 	 */
+	@SuppressWarnings("resource")
 	public static String getLine()
 	{
 		String returnString = "";
-		Scanner scanner = new Scanner(System.in).useDelimiter("\n");
-		returnString = scanner.nextLine();
-		scanner.close();
+		Scanner scanner = new Scanner(System.in).useDelimiter("\n");		
+		returnString = scanner.next();
 		return returnString;
 	}
 }

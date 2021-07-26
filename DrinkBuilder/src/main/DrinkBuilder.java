@@ -1,5 +1,7 @@
 package main;
 
+import java.util.Scanner;
+
 import drink.DrinkHelper;
 import helpers.InputHelper;
 import helpers.MenuHelper;
@@ -12,13 +14,14 @@ public class DrinkBuilder
 		 * Class variables
 		 */
 		int menuOption = 1;
+		Scanner scanner = new Scanner(System.in);
 		
 		System.out.println("Welcome to the Drink Database Builder");
 		do
 		{
 			MenuHelper.displayMenu(MenuHelper.MAIN_MENU);
 			System.out.print("Please enter selection: ");
-			menuOption = InputHelper.getInt();
+			menuOption = scanner.nextInt();
 			
 			
 			switch(menuOption) {
